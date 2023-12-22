@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rooms Page</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header, footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .room {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 15px;
+        }
+
+        .room-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        h1, h2 {
+            margin: 0;
+        }
+
+        .bundles {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .bundle {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 10px;
+            padding: 15px;
+        }
+
+        .bundle-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .items {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+
+        .item {
+            margin-right: 10px;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        img {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 5px;
+        }
+
+        .completed {
+            opacity: 1;
+        }
+
+        .incomplete {
+            opacity: 0.5;
+            filter: grayscale(100%);
+        }
+
+        .quality {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+        }
+
+        .quantity-badge {
+            position: absolute;
+            top: -5px; /* Поднимаем цифру на 5 пикселей (может потребоваться настройка) */
+            right: -3px;
+            background-color: #fff; /* Белый фон */
+            padding: 5px;
+            font-weight: bold; /* Жирный стиль */
+            font-size: 12px; /* Размер шрифта (может потребоваться настройка) */
+            color: #000000; /* Черный цвет (вы можете изменить на свой выбор) */
+            border-radius: 50%; /* Задаем радиус для создания круга */
+            width: 1.2em; /* Диаметр круга (зависит от размера шрифта) */
+            height: 1.2em; /* Диаметр круга (зависит от размера шрифта) */
+            text-align: center; /* Выравниваем цифру по центру круга */
+            line-height: 1.2em; /* Выравниваем цифру по центру круга */
+            border: 1px solid #000; /* Черная окантовка */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Rooms Page</h1>
+</header>
+
+<div th:each="room : ${rooms}" class="room">
+    <div class="room-header">
+        <h1 th:text="${room.name}"></h1>
+        <div>
+            <h1 th:if="${room.isComplete()}" th:text="'✔'" th:style="'color: green;'"></h1>
+            <h1 th:unless="${room.isComplete()}" th:text="'('+${room.completedBundleCount} + '/' + ${room.bundles.size()}+')'"></h1>
+        </div>
+    </div>
+    <div class="bundles">
+        <div class="bundle" th:each="bundle : ${room.bundles}">
+            <div class="bundle-header">
+                <h2 th:text="${bundle.name}"></h2>
+                <div>
+                    <h2 th:if="${bundle.isComplete()}" th:text="'✔'" th:style="'color: green;'"></h2>
+                    <h2 th:unless="${bundle.isComplete()}" th:text="'('+${bundle.getCompletedItemCount()} + '/' + ${bundle.getCompleteQuantity()}+')'"></h2>
+                </div>
+            </div>
+
+            <div class="items" th:each="item : ${bundle.items}">
+                <div class="item">
+                    <!-- Основное изображение предмета -->
+                    <img th:src="${item.img}" th:class="${item.getComplete()} ? 'completed' : 'incomplete'" alt="Item Image"></img>
+
+                    <!-- Звездочка с условием (если quality не равно 0) -->
+                    <img th:if="${item.quality ne 0}" th:src="${item.qualityImg}" class="quality" alt="Quality Image"></img>
+
+                    <!-- Отображение количества предмета в правом верхнем углу -->
+                    <div th:if="${item.quantity gt 1}" class="quantity-badge">
+                        <span th:text="${item.quantity}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2023 Stardew Helper</p>
+</footer>
+
+</body>
+</html>

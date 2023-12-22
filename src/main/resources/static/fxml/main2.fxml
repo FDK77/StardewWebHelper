@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="778.0" prefWidth="518.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <VBox prefHeight="400.0" prefWidth="30.0" style="-fx-background-color: #222222;" BorderPane.alignment="CENTER" />
+   </left>
+   <center>
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="486.0" prefWidth="912.0" BorderPane.alignment="CENTER">
+         <content>
+            <VBox>
+               <children>
+                  <AnchorPane>
+                     <children>
+                        <Label layoutX="14.0" layoutY="3.0" prefHeight="27.0" prefWidth="106.0" text="Crafts Room">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="120.0" layoutY="3.0" text="(0/6)">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <FlowPane layoutY="35.0" prefHeight="101.0" prefWidth="594.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                           <children>
+                              <AnchorPane prefHeight="150.0" prefWidth="150.0">
+                                 <children>
+                                    <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: #222222; -fx-background-radius: 10;">
+                                       <children>
+                                          <HBox layoutX="3.0" layoutY="77.0" prefHeight="53.0" prefWidth="130.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                             <children>
+                                                <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true" />
+                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
+                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+                                             </padding>
+                                          </HBox>
+                                          <Label layoutX="10.0" prefHeight="29.0" prefWidth="98.0" text="Bundle" textFill="WHITE">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <Circle fill="WHITE" layoutX="138.0" layoutY="12.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+                                    <Label layoutX="134.0" layoutY="1.0" text="0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                           <opaqueInsets>
+                              <Insets left="10.0" right="10.0" />
+                           </opaqueInsets>
+                        </FlowPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>

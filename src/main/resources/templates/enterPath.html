@@ -1,0 +1,20 @@
+<!-- enterPath.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- ваш заголовок и стили -->
+</head>
+<body>
+
+<!-- enterPath.html -->
+<!-- ... (ваш код) -->
+<form action="/setPath" method="post">
+  <label for="filePath">Select Save File:</label>
+  <select id="filePath" name="filePath" required>
+    <option th:each="saveFile : ${saveFiles}" th:value="${saveFile + '/' + saveFile}" th:text="${saveFile}"></option>
+  </select>
+  <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>
