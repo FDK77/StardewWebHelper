@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,8 +16,14 @@
             margin: 0;
             padding: 0;
         }
+        .navbar {
+            background-color: #333;
+            color: #fff;
+            text-align: left;
+            padding: 10px;
+        }
 
-        header, footer {
+         .footer {
             background-color: #333;
             color: #fff;
             text-align: center;
@@ -117,11 +124,7 @@
     </style>
 </head>
 <body>
-
-<header>
-    <h1>Rooms Page</h1>
-</header>
-
+<header th:replace="~{fragments/header}">Header</header>
 <div th:each="room : ${rooms}" class="room">
     <div class="room-header">
         <h1 th:text="${room.name}"></h1>
@@ -158,9 +161,7 @@
     </div>
 </div>
 
-<footer>
-    <p>© 2023 Stardew Helper</p>
-</footer>
+<footer th:replace="~{fragments/footer}">Footer</footer>
 
 </body>
 </html>

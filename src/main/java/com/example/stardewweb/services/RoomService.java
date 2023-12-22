@@ -17,7 +17,6 @@ public class RoomService {
         String filePath = (String) session.getAttribute("filePath");
 
         if (filePath == null) {
-            // Если путь не сохранен, перенаправить пользователя на страницу ввода пути
             return Collections.emptyList();
         }
 

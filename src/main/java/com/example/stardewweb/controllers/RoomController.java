@@ -17,8 +17,11 @@ import java.io.File;
 public class RoomController {
     @Autowired
     RoomService roomService;
-    @GetMapping("/rooms")
+    @GetMapping("/")
     public String showAllRooms(Model model, HttpSession session) {
+        if (session.getAttribute("filePath")==null){
+            return "redirect:/enterPath";
+        }
         model.addAttribute("rooms", roomService.initRoom(session));
         return "rooms";
     }
@@ -28,7 +31,7 @@ public class RoomController {
         String savesDirectory = userHome + File.separator + "AppData" + File.separator + "Roaming" + File.separator + "StardewValley" + File.separator + "Saves";
         String fullPath = savesDirectory + File.separator + filePath;
         session.setAttribute("filePath", fullPath);
-        return "redirect:/rooms";
+        return "redirect:/";
     }
 
     @GetMapping("/enterPath")
