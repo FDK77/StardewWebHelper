@@ -1,35 +1,92 @@
 <style>
     header {
-        display:flex;
+        display: flex;
         justify-content: space-between;
+        align-items: center;
         background-color: #333;
         color: #fff;
         padding: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-    .navInHeader{
+
+    .brand {
         display: flex;
-        align-content: center;
-        height: 100%;
+        align-items: center;
     }
+
+    .brand img {
+        width: 80px;
+        height: 80px;
+        margin-right: -10px;
+        margin-top: -12px;
+    }
+
+    .brand h1 {
+        margin: 0;
+        margin-right: 20px;
+    }
+
+    .buttons {
+        margin-right: auto;
+    }
+
+    .button {
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+        border: 2px solid #fff;
+        padding: 10px 15px;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        margin-right: 10px; /* Добавлен отступ между кнопками */
+    }
+
+    .button:hover {
+        background-color: #fff;
+        color: #333;
+        border-color: #333;
+    }
+
+    .actions {
+        display: flex;
+        align-items: center;
+    }
+
     .nav-link {
-        margin-right: 20px; /* Добавьте нужный отступ между элементами */
+        margin-right: 20px;
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .nav-link img {
+        width: 30px;
+        height: 30px;
     }
 </style>
 
 <header class="header" th:fragment="header">
-    <div>
-
+    <div class="brand">
+        <img src="/pic/logo.png" alt="Logo">
+        <h1>StardewHelper</h1>
     </div>
-    <div class="centreText">
-        <h1>Rooms Page</h1>
+    <div class="buttons">
+        <a class="button" href="/">
+            Bundles
+        </a>
+        <a class="button" href="/fish/all">
+            Fish
+        </a>
+        <a class="button" href="/artifacts/all">
+            Artifacts
+        </a>
+        <a class="button" href="/achievements/all">
+            Achievements
+        </a>
     </div>
-    <div class="navInHeader">
-            <a class="nav-link" href="/enterPath" style="padding: 0;">
-                <img src="/pic/save.png" alt="changeSave" style="width: 30px; height: 30px;">
-            </a>
-            <a class="nav-link" href="/shutdown" style="padding: 0;">
-                <img src="/pic/exit.png" alt="shutdown" style="width: 30px; height: 30px;">
-            </a>
+    <div class="actions">
+        <a class="nav-link" href="/enterPath">
+            <img src="/pic/save.png" alt="changeSave">
+        </a>
     </div>
-
 </header>

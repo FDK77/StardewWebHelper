@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artifacts Page</title>
+
+  <style>
+    *{
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      background-color: #f5f5f5;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header, footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      width: 100%;
+
+    }
+    header{
+      margin-bottom: 20px;
+    }
+
+
+    .artifact-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+    .artifact-item {
+      text-align: center;
+      margin: 10px;
+      padding: 15px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      width: 200px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .artifact-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .artifact-item img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .artifact-item a {
+      text-decoration: none;
+      color: #333;
+      width: 100%;
+    }
+
+    .artifact-name {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    /* Search Styles */
+    #search-container {
+      margin-bottom: 20px;
+    }
+
+    #search-input {
+      padding: 10px;
+      width: 200px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+
+    /* Модальное окно стили */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      transition: opacity 0.25s ease-in-out;
+    }
+    .modal.show {
+      opacity: 1;
+    }
+
+    .modal-content {
+      position: relative;
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 600px;
+      border-radius: 10px;
+    }
+    .fish-info {
+      flex: 1;
+      padding-left: 20px;
+      white-space: pre-line; /* Это свойство сохраняет пробелы и переносы строки */
+    }
+    .artifact-details {
+      display: flex;
+      align-items: center;
+    }
+
+    .artifact-image {
+      flex: 1;
+    }
+
+    .artifact-info {
+      flex: 1;
+      padding-left: 20px;
+    }
+
+    .close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 10px;
+      cursor: pointer;
+    }
+    .artifact-image img {
+      width: 100%;
+      max-width: 250px; /* Максимальная ширина изображения */
+    }
+
+  </style>
+</head>
+<body>
+<header th:replace="~{fragments/header}">Header</header>
+
+<!-- Search Bar -->
+<div id="search-container">
+  <input type="text" id="search-input" placeholder="Search by achievement name" oninput="filterArtifacts()">
+</div>
+
+<div class="artifact-list">
+  <div th:each="achievement : ${Achievements}" class="artifact-item"
+       th:data-name="${achievement.name}" th:data-description="${achievement.description}" th:data-img="${achievement.img}" th:style="${achievement.assembled} ? 'background-color: lightgreen;' : ''"
+       onclick="openModal(this)">
+    <img th:src="${achievement.img}" alt="Artifact Image">
+    <p class="artifact-name" th:text="${achievement.name}"></p>
+  </div>
+</div>
+
+<!-- Модальное окно -->
+<div id="artifactModal" class="modal">
+  <div class="modal-content">
+    <div class="artifact-details">
+      <div class="artifact-image">
+        <img id="modalImage" alt="Artifact Image">
+      </div>
+      <div class="artifact-info">
+        <h1 id="modalName"></h1>
+        <p id="modalDescription"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer th:replace="~{fragments/footer}">Footer</footer>
+
+<script>
+  // (Ваши скрипты без изменений)
+  // Функция для открытия модального окна с деталями артефакта
+  function openModal(element) {
+    var name = element.getAttribute('data-name');
+    var description = element.getAttribute('data-description');
+    var img = element.getAttribute('data-img');
+
+    document.getElementById('modalName').innerText = name;
+    document.getElementById('modalDescription').innerText = "Description: " + description;
+    document.getElementById('modalImage').src = img;
+
+    document.getElementById('artifactModal').style.display = 'block';
+    var modal = document.getElementById('artifactModal');
+    modal.style.display = 'block';
+    setTimeout(function() {
+      modal.classList.add('show');
+    }, 50);
+  }
+
+  // Функция для закрытия модального окна
+  function closeModal() {
+    document.getElementById('artifactModal').style.display = 'none';
+    var modal = document.getElementById('artifactModal');
+    modal.classList.remove('show');
+    setTimeout(function() {
+      modal.style.display = 'none';
+    }, 250);
+  }
+
+  // Функция для фильтрации артефактов
+  function filterArtifacts() {
+    var input, filter, artifactList, artifactItem, artifactName, i;
+    input = document.getElementById('search-input');
+    filter = input.value.toUpperCase();
+    artifactList = document.getElementsByClassName('artifact-item');
+
+    for (i = 0; i < artifactList.length; i++) {
+      artifactItem = artifactList[i];
+      artifactName = artifactItem.querySelector('.artifact-name');
+
+      if (artifactName.innerText.toUpperCase().indexOf(filter) > -1) {
+        artifactItem.style.display = '';
+      } else {
+        artifactItem.style.display = 'none';
+      }
+    }
+  }
+
+  window.onclick = function(event) {
+    var modal = document.getElementById('artifactModal');
+    if (event.target == modal) {
+      closeModal();
+    }
+  }
+</script>
+</body>
+</html>
