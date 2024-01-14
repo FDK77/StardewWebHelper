@@ -18,8 +18,6 @@ import java.io.File;
 public class RoomController {
     @Autowired
     RoomService roomService;
-    @Autowired
-    FishService fishService;
     @GetMapping("/")
     public String showAllRooms(Model model, HttpSession session) {
         if (session.getAttribute("filePath")==null){
