@@ -124,7 +124,7 @@
 </head>
 <body>
 <header th:replace="~{fragments/header}">Header</header>
-<div th:each="room : ${rooms}" class="room">
+<div th:each="room : ${rooms}"  class="room">
     <div class="room-header">
         <h1 th:text="${room.name}"></h1>
         <div>

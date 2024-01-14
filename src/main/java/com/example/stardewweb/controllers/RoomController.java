@@ -1,5 +1,6 @@
 package com.example.stardewweb.controllers;
 
+import com.example.stardewweb.services.FishService;
 import com.example.stardewweb.services.RoomService;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import java.io.File;
 public class RoomController {
     @Autowired
     RoomService roomService;
+    @Autowired
+    FishService fishService;
     @GetMapping("/")
     public String showAllRooms(Model model, HttpSession session) {
         if (session.getAttribute("filePath")==null){
@@ -44,4 +47,6 @@ public class RoomController {
         model.addAttribute("saveFiles", saveFiles);
         return "enterPath";
     }
+
+
 }

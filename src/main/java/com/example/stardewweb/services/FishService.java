@@ -19,6 +19,13 @@ public class FishService {
         return fishes;
     }
 
+    public List<Fish> getOrInitFish(){
+        if(fishes!=null){
+            return fishes;
+        }
+        else return initFish();
+    }
+
     public List<Fish> FishStatus(HttpSession session) throws Exception {
         FishCaughtParser parser = new FishCaughtParser();
         List<Fish> fishes2 = parser.parseXml(fishes,session);

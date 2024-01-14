@@ -1,6 +1,8 @@
 package com.example.stardewweb;
 
+import com.example.stardewweb.models.gameOther.Achivements;
 import com.example.stardewweb.models.items.artifacts.Artifacts;
+import com.example.stardewweb.services.AchivementsService;
 import com.example.stardewweb.services.ArtifactsService;
 import com.example.stardewweb.services.FishService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,12 +59,12 @@ public class StardewWebApplication {
         }
     }
     public static void Test() throws IOException {
-        ArtifactsService artifactService = new ArtifactsService();
-        List<Artifacts> artifacts = new ArrayList<>();
-        artifacts = artifactService.initArtifacts();
-        System.out.println(artifacts.size());
-        for (Artifacts art:
-             artifacts) {
+        AchivementsService serv = new AchivementsService();
+        List<Achivements> a = new ArrayList<>();
+        a = serv.initAchievements();
+        System.out.println(a.size());
+        for (Achivements art:
+             a) {
             System.out.println(art);
         }
     }
